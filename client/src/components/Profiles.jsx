@@ -4,6 +4,10 @@ import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { CREATE_PROFILE } from '../mutations/profile';
 import { SingleProfile } from './SingleProfile';
+import Title from './../stylesComponents/Title';
+import Input from './../stylesComponents/Input';
+import Button from './../stylesComponents/Button';
+import MainText from './../stylesComponents/MainText';
 
 
 const Profiles = () => {
@@ -57,21 +61,21 @@ const Profiles = () => {
 
     return (
         <div>
-            <h2>Profiles</h2>
+            <Title first>Profiles</Title>
             <form>
-                <input placeholder='name' value={username} onChange={(e) => { setName(e.target.value) }}></input>
-                <input placeholder='tel' value={tel} onChange={(e) => { setTel(e.target.value) }}></input>
-                <input placeholder='email' value={email} onChange={(e) => { setEmail(e.target.value) }}></input>
+                <Input placeholder='name' value={username} onChange={(e) => { setName(e.target.value) }}></Input>
+                <Input placeholder='tel' value={tel} onChange={(e) => { setTel(e.target.value) }}></Input>
+                <Input placeholder='email' value={email} onChange={(e) => { setEmail(e.target.value) }}></Input>
 
-                <button onClick={createNewProfile} >Create Profile</button>
-                <button onClick={getProfiles} >Give profiles</button>
+                <Button second onClick={createNewProfile} >Create Profile</Button>
+                <Button first onClick={getProfiles} >Give profiles</Button>
             </form>
 
-            <div>{profile.map((p) => <div key={p.id} onClick={() => { getSingleProfile(p.id) }}>{p.username}-{p.contacts.map((c, index) => <span key={index}>
-                {c.tel}-{c.email}</span>)}</div>)}</div>
+            <div>{profile.map((p) => <MainText first key={p.id} onClick={() => { getSingleProfile(p.id) }}>{p.username}-{p.contacts.map((c, index) => <span key={index}>
+                {c.tel}-{c.email}</span>)}</MainText>)}</div>
 
             <div>
-                <h2>Single Profile</h2>
+                <Title second>Single Profile</Title>
                 <SingleProfile id={id} />
             </div>
 

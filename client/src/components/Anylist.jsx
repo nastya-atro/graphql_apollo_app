@@ -1,7 +1,16 @@
-
 import { useQuery } from '@apollo/client';
-import { GET_MEDIA } from './../query/anylist';
+import { GET_MEDIA } from '../query/anylist';
 import { useState, useEffect } from 'react';
+import Title from './../stylesComponents/Title';
+import MainText from './../stylesComponents/MainText';
+import styled from 'styled-components'
+
+const TitleAnyList = styled.div`
+background-color: white;
+padding: 10px;
+text-transform: uppercase;
+margin-bottom: 10px
+`
 
 export const Anylist = () => {
     const { data, loading, error } = useQuery(GET_MEDIA, { variables: { id: 5 } })
@@ -17,12 +26,13 @@ export const Anylist = () => {
 
     return (
         <div>
-            <h2>Media</h2>
-            <div>{media && <div>{media.title.romaji}-  {media.title.english}- {media.title.native}- {media.title.userPreferred}
+            <Title first>Media</Title>
+            <MainText second>{media && <div>
+                <TitleAnyList>{media.title.romaji}-  {media.title.english}- {media.title.native}- {media.title.userPreferred}</TitleAnyList>
                 <div>
                     {media.description}
                 </div>
-            </div>}</div>
+            </div>}</MainText>
         </div>
     )
 }
